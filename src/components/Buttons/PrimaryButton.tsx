@@ -1,7 +1,13 @@
 import React from 'react'
-import { Text, StyleSheet, View, Dimensions, TouchableWithoutFeedback } from 'react-native'
+import { Text, StyleSheet, View, Dimensions, TouchableWithoutFeedback, GestureResponderEvent } from 'react-native'
 
-const PrimaryButton = ({ text, width }) => {
+type ButtonProps = {
+    text: string,
+    width: number,
+    onPress?: (event: GestureResponderEvent) => void
+}
+const PrimaryButton: React.FC<ButtonProps> = (props) => {
+    const { text, width } = props
     return (
         <View style={[styles.button, { width: width * 2.5 }]}>
             <TouchableWithoutFeedback onPress={() => alert('Tocaste el botòn')}>

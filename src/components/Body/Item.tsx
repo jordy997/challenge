@@ -1,10 +1,20 @@
 import React from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { GestureResponderEvent, Image, StyleSheet, Text, View } from 'react-native';
 
-const Item = ({ product, createdAt, points, is_redemption, image }) => {
+type DataTypeItem = {
+    createdAt: string,
+    product: string,
+    points: number,
+    image: string,
+    is_redemption: boolean,
+    id: string,
+    onPress?: (event: GestureResponderEvent) => void
+}
+const Item: React.FC<DataTypeItem> = (props) => {
+    const { createdAt, product, points, image, is_redemption } = props
     return (
         <View style={styles.item}>
-            <Image source={image} style={styles.image} />
+            <Image source={{ uri: image }} style={styles.image} />
             <View>
                 <Text style={styles.title}>{product}</Text>
                 <Text style={styles.date}>{createdAt}</Text>
@@ -48,8 +58,7 @@ const styles = StyleSheet.create({
     image: {
         width: 55,
         height: 55,
-        borderRadius: 10,
-        backgroundColor: 'red'
+        borderRadius: 10
     }
 })
 
