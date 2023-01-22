@@ -25,16 +25,17 @@ const HomeScreen: React.FC = () => {
         navigation.navigate("DetailScreen", { id })
     }
 
-    const partialPoints = data.map(e => e.points);
+    if (!data) return
+
     const initialValue = 0;
+    const partialPoints = data.map(e => e.points);
     const totalPoints = partialPoints.reduce(
         (accumulator, currentValue) => accumulator + currentValue, initialValue);
 
     const reducePoints = data.filter(e => e.is_redemption === true);
     const redemptionPoints = reducePoints.map(e => e.points);
-    const value = 0;
     const pointsToSubstract = redemptionPoints.reduce(
-        (accumulator, currentValue) => accumulator + currentValue, value);
+        (accumulator, currentValue) => accumulator + currentValue, initialValue);
 
     return (
         <SafeAreaView style={styles.container}>
