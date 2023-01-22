@@ -11,6 +11,8 @@ import { useNavigation } from "@react-navigation/native"
 const HomeScreen: React.FC = () => {
     const [data, setData] = useState<DataTypeItem[]>()
     const navigation = useNavigation()
+    const [lostPoints, setLostPoints] = useState<boolean>()
+    const [pointsEarned, setPointsEarned] = useState<boolean>()
 
     const getDataService = async () => {
         const result = await DataService.getData()
@@ -32,22 +34,27 @@ const HomeScreen: React.FC = () => {
     const totalPoints = partialPoints.reduce(
         (accumulator, currentValue) => accumulator + currentValue, initialValue);
 
-    const reducePoints = data.filter(e => e.is_redemption === true);
-    const redemptionPoints = reducePoints.map(e => e.points);
+    const reduceItems = data.filter(e => e.is_redemption === true);
+    const redemptionPoints = reduceItems.map(e => e.points);
     const pointsToSubstract = redemptionPoints.reduce(
         (accumulator, currentValue) => accumulator + currentValue, initialValue);
+
+    const redemptiomItems = data.filter(e => e.is_redemption === false);
+
+    const validatingAttributes = lostPoints ? reduceItems :
+        pointsEarned ? redemptiomItems : data
 
     return (
         <SafeAreaView style={styles.container}>
             <Header />
-            <Card totalPoints={totalPoints - pointsToSubstract} />
+            <Card totalPoints={lostPoints ? pointsToSubstract : (totalPoints - pointsToSubstract)} />
             <View style={{ height: Dimensions.get('screen').height * .47 }}>
                 <Text style={styles.points}>
                     TUS MOVIMIENTOS
                 </Text>
                 <FlatList
                     contentContainerStyle={styles.flatList}
-                    data={data}
+                    data={validatingAttributes}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => {
                         return <Item {...item} onPress={() => goToDetails(item.id)} />
@@ -55,8 +62,29 @@ const HomeScreen: React.FC = () => {
                 />
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 10 }}>
-                <PrimaryButton text={'Ganados'} width={60} />
-                <PrimaryButton text={'Canjeados'} width={60} />
+                {!lostPoints && !pointsEarned ? (
+                    <>
+                        <PrimaryButton
+                            text={'Ganados'}
+                            width={60}
+                            onPress={() => setPointsEarned(true)}
+                        />
+                        <PrimaryButton
+                            text={'Canjeados'}
+                            width={60}
+                            onPress={() => setLostPoints(true)}
+                        />
+                    </>
+                ) : (
+                    <PrimaryButton
+                        text={'Todos'}
+                        width={130}
+                        onPress={() =>
+                            lostPoints ? setLostPoints(false)
+                                : setPointsEarned(false)
+                        }
+                    />
+                )}
             </View>
         </SafeAreaView>
     )

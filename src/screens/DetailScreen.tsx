@@ -44,7 +44,7 @@ const DetailScreen: React.FC<DetailProps> = (props) => {
                 <Text style={styles.detailText}>Con esta compra acumulaste: </Text>
                 <Text style={styles.points}>{data.points} puntos</Text>
             </View>
-            <PrimaryButton text='Aceptar' width={130} onPress={() => navigation.navigate("HomeScreen")} />
+            <PrimaryButton text='Aceptar' width={130} onPress={() => navigation.goBack()} />
         </SafeAreaView>
     )
 }

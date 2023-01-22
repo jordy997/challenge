@@ -7,9 +7,6 @@ const Header = () => {
             <Text style={styles.headerText}>
                 Bienvenido de vuelta!
             </Text>
-            <Text>
-                Ruben Rodriguez
-            </Text>
             <Text style={styles.points}>
                 TUS PUNTOS
             </Text>
@@ -34,7 +31,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 19,
         color: '#9B9898',
-        marginTop: 20,
+        marginTop: 15,
         alignSelf: 'flex-start'
     }
 })
