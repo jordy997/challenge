@@ -2,14 +2,15 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 export type PointsProps = {
-    points: number
+    totalPoints: number
 }
-const Card = ({ points }: PointsProps) => {
+const Card: React.FC<PointsProps> = (props) => {
+    const { totalPoints } = props
     return (
         <View style={styles.container}>
             <View style={styles.cardPoints}>
                 <Text style={styles.month}>Month</Text>
-                <Text style={styles.points}>{points} pts</Text>
+                <Text style={styles.points}>{totalPoints} pts</Text>
             </View>
         </View>
     )
