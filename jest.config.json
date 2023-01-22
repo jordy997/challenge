@@ -1,0 +1,8 @@
+{
+    "preset": "react-native",
+    "bail": 1,
+    "verbose": true,
+    "setupFiles": [
+        "<rootDir>/jest/setup.ts"
+    ]
+}

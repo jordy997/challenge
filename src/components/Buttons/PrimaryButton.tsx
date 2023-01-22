@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, StyleSheet, View, Dimensions, TouchableWithoutFeedback, GestureResponderEvent } from 'react-native'
+import { Text, StyleSheet, View, Dimensions, TouchableWithoutFeedback } from 'react-native'
 
 type ButtonProps = {
     text: string,

@@ -32,6 +32,8 @@ const DetailScreen: React.FC<DetailProps> = (props) => {
         return <></>
     }
 
+    const formattedDate = new Date(data.createdAt)
+
     return (
         <SafeAreaView>
             <View style={styles.header}>
@@ -40,7 +42,7 @@ const DetailScreen: React.FC<DetailProps> = (props) => {
             <Image source={{ uri: data.image }} style={styles.image} />
             <View style={styles.bottom}>
                 <Text style={styles.detailText}>Detalles del producto:</Text>
-                <Text style={styles.date}>{data.createdAt}</Text>
+                <Text style={styles.date}>{formattedDate.toDateString()}</Text>
                 <Text style={styles.detailText}>Con esta compra acumulaste: </Text>
                 <Text style={styles.points}>{data.points} puntos</Text>
             </View>

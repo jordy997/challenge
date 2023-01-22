@@ -1,6 +1,5 @@
 import React from 'react'
-import { GestureResponderEvent, Image, StyleSheet, Text, View } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { GestureResponderEvent, Image, StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
 
 type DataTypeItem = {
     createdAt: string,
@@ -13,14 +12,14 @@ type DataTypeItem = {
 }
 const Item: React.FC<DataTypeItem> = (props) => {
     const { createdAt, product, points, image, is_redemption, onPress } = props
-
+    const date = new Date(createdAt)
     return (
         <TouchableWithoutFeedback onPress={onPress}>
             <View style={styles.item}>
                 <Image source={{ uri: image }} style={styles.image} />
                 <View>
                     <Text style={styles.title}>{product}</Text>
-                    <Text style={styles.date}>{createdAt}</Text>
+                    <Text style={styles.date}>{date.toDateString()}</Text>
                 </View>
                 <Text style={styles.points}>
                     <Text style={{ color: is_redemption ? '#FF0000' : '#00B833' }}>
