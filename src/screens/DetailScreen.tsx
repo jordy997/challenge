@@ -1,20 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, SafeAreaView, StyleSheet, Dimensions, Image } from 'react-native'
 import PrimaryButton from '../components/Buttons/PrimaryButton'
 import DataService from '../services/DataService'
 import { DataTypeItem } from '../types/DataType'
+import { RouteProp } from '@react-navigation/native'
+import { GlobalParamList } from '../Navigation/GlobalNavigation'
+import { useNavigation } from "@react-navigation/native"
 
-const DetailScreen: React.FC = () => {
-    const [data, setData] = React.useState<DataTypeItem>()
+type DetailRouteProps = RouteProp<GlobalParamList, "DetailScreen">
+
+type DetailProps = {
+    route: DetailRouteProps
+}
+
+const DetailScreen: React.FC<DetailProps> = (props) => {
+    const { route } = props
+    const { id } = route.params
+    const [data, setData] = useState<DataTypeItem>()
+    const navigation = useNavigation()
 
     const getDetail = async () => {
-        const result = await DataService.getById('11')
-        result && setData(result[0])
+        const result = await DataService.getById(id)
+        setData(result[0])
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         getDetail()
-    }, ['11'])
+    }, [id])
+
+    if (!data) {
+        return <></>
+    }
 
     return (
         <SafeAreaView>
@@ -28,7 +44,7 @@ const DetailScreen: React.FC = () => {
                 <Text style={styles.detailText}>Con esta compra acumulaste: </Text>
                 <Text style={styles.points}>{data.points} puntos</Text>
             </View>
-            <PrimaryButton text='Aceptar' width={130} />
+            <PrimaryButton text='Aceptar' width={130} onPress={() => navigation.navigate("HomeScreen")} />
         </SafeAreaView>
     )
 }

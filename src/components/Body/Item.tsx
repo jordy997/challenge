@@ -1,5 +1,6 @@
 import React from 'react'
 import { GestureResponderEvent, Image, StyleSheet, Text, View } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 type DataTypeItem = {
     createdAt: string,
@@ -8,24 +9,27 @@ type DataTypeItem = {
     image: string,
     is_redemption: boolean,
     id: string,
-    onPress?: (event: GestureResponderEvent) => void
+    onPress: () => void
 }
 const Item: React.FC<DataTypeItem> = (props) => {
-    const { createdAt, product, points, image, is_redemption } = props
+    const { createdAt, product, points, image, is_redemption, onPress } = props
+
     return (
-        <View style={styles.item}>
-            <Image source={{ uri: image }} style={styles.image} />
-            <View>
-                <Text style={styles.title}>{product}</Text>
-                <Text style={styles.date}>{createdAt}</Text>
-            </View>
-            <Text style={styles.points}>
-                <Text style={{ color: is_redemption ? '#FF0000' : '#00B833' }}>
-                    {is_redemption ? '-' : '+'}
+        <TouchableWithoutFeedback onPress={onPress}>
+            <View style={styles.item}>
+                <Image source={{ uri: image }} style={styles.image} />
+                <View>
+                    <Text style={styles.title}>{product}</Text>
+                    <Text style={styles.date}>{createdAt}</Text>
+                </View>
+                <Text style={styles.points}>
+                    <Text style={{ color: is_redemption ? '#FF0000' : '#00B833' }}>
+                        {is_redemption ? '-' : '+'}
+                    </Text>
+                    {points} {'  >'}
                 </Text>
-                {points} {'  >'}
-            </Text>
-        </View>
+            </View>
+        </TouchableWithoutFeedback>
     )
 };
 

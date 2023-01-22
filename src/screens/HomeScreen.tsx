@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { Dimensions, FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import Body from '../components/Body/Body';
 import Item from '../components/Body/Item';
 import PrimaryButton from '../components/Buttons/PrimaryButton';
 import Card from '../components/Card/Card';
 import Header from '../components/Header/Header';
 import DataService from '../services/DataService';
 import { DataTypeItem } from '../types/DataType'
-
+import { useNavigation } from "@react-navigation/native"
 
 const HomeScreen: React.FC = () => {
     const [data, setData] = useState<DataTypeItem[]>()
+    const navigation = useNavigation()
+
     const getDataService = async () => {
         const result = await DataService.getData()
         setData(result)
@@ -19,6 +20,10 @@ const HomeScreen: React.FC = () => {
     React.useEffect(() => {
         getDataService()
     }, [])
+
+    const goToDetails = (id: string) => {
+        navigation.navigate("DetailScreen", { id })
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -33,7 +38,7 @@ const HomeScreen: React.FC = () => {
                     data={data}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => {
-                        return <Item {...item} />
+                        return <Item {...item} onPress={() => goToDetails(item.id)} />
                     }}
                 />
             </View>

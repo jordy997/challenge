@@ -1,12 +1,15 @@
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaView, StyleSheet } from 'react-native';
-import DetailScreen from './src/screens/DetailScreen';
-import HomeScreen from './src/screens/HomeScreen';
+import GlobalNavigation from './src/Navigation/GlobalNavigation';
 
 export default function App() {
+
   return (
     <SafeAreaView style={styles.container}>
-      {/* <HomeScreen /> */}
-      <DetailScreen />
+      <NavigationContainer>
+        <GlobalNavigation />
+      </NavigationContainer>
     </SafeAreaView>
   );
 }

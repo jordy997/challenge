@@ -4,13 +4,13 @@ import { Text, StyleSheet, View, Dimensions, TouchableWithoutFeedback, GestureRe
 type ButtonProps = {
     text: string,
     width: number,
-    onPress?: (event: GestureResponderEvent) => void
+    onPress?: () => void
 }
 const PrimaryButton: React.FC<ButtonProps> = (props) => {
-    const { text, width } = props
+    const { text, width, onPress } = props
     return (
         <View style={[styles.button, { width: width * 2.5 }]}>
-            <TouchableWithoutFeedback onPress={() => alert('Tocaste el botòn')}>
+            <TouchableWithoutFeedback onPress={onPress}>
                 <Text style={styles.text}>{text}</Text>
             </TouchableWithoutFeedback>
         </View>
