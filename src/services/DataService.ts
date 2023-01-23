@@ -1,4 +1,3 @@
-import { DataTypeItem } from "../types/DataType"
 
 export default class DataService {
     static getData = async () => {
