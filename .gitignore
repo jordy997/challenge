@@ -15,6 +15,3 @@ package-lock.json
 
 # macOS
 .DS_Store
-
-#coverage
-coverage/
