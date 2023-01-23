@@ -4,7 +4,9 @@ Este repo es parte de una entrevista laboral.
 
 # Instrucciones
 
-Primero se clona el repo, luego se corre el comando expo install para que te isntale las dependencias requeridas.
+Primero se clona el repo, luego se corre el comando expo install para que te instale las dependencias requeridas.
+
+expo install
 
 Este proyecto està realizado en React Native y su nueva arquitectura implementada a partir de la version 
 0.68.0, por ese motivo van a necesitar la versiòn màs reciente de Node.js.
